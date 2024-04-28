@@ -27,13 +27,26 @@ contract("CrudSmartContract", () => {
         catch (error) {
             assert(error.message.includes('User doesnt exist'));
             return;
-        }  
+        }
         assert(false);
     });
     it('should delete a user', async () => {
         await crudSmartContract.deleteId(1);
         try {
+            //trying to read a non-existing user
             await crudSmartContract.read(1)
+        }
+        catch (error) {
+            assert(error.message.includes('User doesnt exist'));
+            return;
+        }
+        //ending here if sm has a problem
+        assert(false);
+    });
+    it('should not delete a non-existing user', async () => {
+        try {
+            //10 no user like this exist
+            await crudSmartContract.deleteId(10);
         }
         catch (error) {
             assert(error.message.includes('User doesnt exist'));
