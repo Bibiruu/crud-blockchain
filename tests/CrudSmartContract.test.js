@@ -19,8 +19,8 @@ contract("CrudSmartContract", () => {
         assert(user[0].toNumber() === 1);
         assert(user[1] === 'Jose');
     });
-    //revert handling
-    it('should not update a non-existing user', async () => {
+    //revert handling, update()
+    it('should NOT update a non-existing user', async () => {
         try {
             await crudSmartContract.update(2, 'Jo');
         }
