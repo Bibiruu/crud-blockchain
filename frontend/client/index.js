@@ -42,6 +42,11 @@ const initContract = () => {
 const initApp = () => {
   const $create = document.getElementById('create');
   const $createResult = document.getElementById('create-result');
+  const $read = document.getElementById('read');
+  const $readResult = document.getElementById('read-result');
+  const $edit = document.getElementById('edit');
+  const $editResult = document.getElementById('edit-result');
+
   let accounts = [];
 
   web3.eth.getAccounts()
@@ -54,7 +59,7 @@ const initApp = () => {
     const name = e.target.elements[0].value;
     crud.methods
       .create(name)
-      .send({ from: accounts[0]})
+      .send({ from: accounts[0] })
       .then(() => {
         $createResult.innerHTML = `New user ${name} was sucessfully created`;
       })
@@ -62,6 +67,38 @@ const initApp = () => {
         $createResult.innerHTML = `Oops, theres was an error while trying to create a new user`;
       });
   });
+
+  $read.addEventListener('submit', error => {
+    error.preventDefault();
+    const id = e.target.elements[0].value;
+    crud.methods
+      .read(id)
+      .call()
+      .then(result => {
+        $readResult.innerHTML = `Id: ${result[0]} Name: ${result[1]}`;
+      })
+      .catch(() => {
+        $readResult.innerHTML = `Oops, theres was an problem while 
+        trying to read user ${id}`;
+      });
+  });
+
+  $edit.addEventListener('submit', error => {
+    error.preventDefault();
+    const id = e.target.elements[0].value;
+    const name = e.target.elements[0].value;
+    crud.methods
+      .update(id, name)
+      .send({ from: accounts[0] })
+      .then(() => {
+        $editResult.innerHTML = `Changed name of user ${id} to
+        ${name}`;
+      })
+      .catch(() => {
+        $editResult.innerHTML = `Oops, theres was an error 
+        while trying to update user ${id}`;
+      });
+  })
 };
 
 document.addEventListener('DOMContentLoaded', () => {
