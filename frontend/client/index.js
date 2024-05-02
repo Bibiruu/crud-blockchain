@@ -46,9 +46,11 @@ const initApp = () => {
   const $readResult = document.getElementById('read-result');
   const $edit = document.getElementById('edit');
   const $editResult = document.getElementById('edit-result');
+  const $delete = document.getElementById('delete');
+  const $deleteResult = document.getElementById('delete-result');
 
+  //getting account from metamask
   let accounts = [];
-
   web3.eth.getAccounts()
     .then(_accounts => {
       accounts = _accounts;
@@ -86,7 +88,7 @@ const initApp = () => {
   $edit.addEventListener('submit', error => {
     error.preventDefault();
     const id = e.target.elements[0].value;
-    const name = e.target.elements[0].value;
+    const name = e.target.elements[1].value;
     crud.methods
       .update(id, name)
       .send({ from: accounts[0] })
@@ -98,7 +100,23 @@ const initApp = () => {
         $editResult.innerHTML = `Oops, theres was an error 
         while trying to update user ${id}`;
       });
-  })
+  });
+
+  $delete.addEventListener('submit', error => {
+    error.preventDefault();
+    const id = e.target.elements[0].value;
+    crud.methods
+      .deleteId(id)
+      .send({ from: accounts[0] })
+      .then(() => {
+        $deleteResult.innerHTML = `Deleted user ${id}`;
+      })
+      .catch(() => {
+        $deleteResult.innerHTML = `Oops, there was an error while trying
+        to delete user ${id}`;
+      });
+  });
+
 };
 
 document.addEventListener('DOMContentLoaded', () => {
