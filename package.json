@@ -20,8 +20,12 @@
   "homepage": "https://github.com/Bibiruu/crud-blockchain#readme",
   "devDependencies": {
     "truffle": "^5.7.3",
-    "webpack-cli": "^5.1.4",
     "webpack": "^5.0.0",
+    "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"
+  },
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.1.15",
+    "dotenv": "^16.4.5"
   }
 }

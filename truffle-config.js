@@ -1,13 +1,4 @@
 /**
- * Use this file to configure your truffle project. It's seeded with some
- * common settings for different networks and features like migrations,
- * compilation, and testing. Uncomment the ones you need or modify
- * them to suit your project as necessary.
- *
- * More information about configuration can be found at:
- *
- * https://trufflesuite.com/docs/truffle/reference/configuration
- *
  * Hands-off deployment with Infura
  * --------------------------------
  *
@@ -27,36 +18,15 @@
  *
  * MNEMONIC = <Your 12 phrase mnemonic>
  * PROJECT_ID = <Your Infura project id>
- *
- * Deployment with Truffle Dashboard (Recommended for best security practice)
- * --------------------------------------------------------------------------
- *
- * Are you concerned about security and minimizing rekt status 🤔?
- * Use this method for best security:
- *
- * Truffle Dashboard lets you review transactions in detail, and leverages
- * MetaMask for signing, so there's no need to copy-paste your mnemonic.
- * More details can be found at 🔎:
- *
- * https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-dashboard/
  */
 
-// require('dotenv').config();
-// const { MNEMONIC, PROJECT_ID } = process.env;
-
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
+//converting to js object for easy read and manipulation
+const fs = require('fs');
+require('dotenv').config();
+const { NODE_ENDPOINT } = process.env;
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
-  /**
-   * Networks define how you connect to your ethereum client and let you set the
-   * defaults web3 uses to send transactions. If you don't specify one truffle
-   * will spin up a managed Ganache instance for you on port 9545 when you
-   * run `develop` or `test`. You can ask a truffle command to use a specific
-   * network from the command line, e.g
-   *
-   * $ truffle test --network <network-name>
-   */
-
   networks: {
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
@@ -73,7 +43,7 @@ module.exports = {
     sepolia: {
       provider: () => new HDWalletProvider(
         private_key, 
-        `https://sepolia.infura.io/v3/d8e458887fed47f38f067833ca625f1a`
+        INFURA_NODE_END_POINT
       ),
       network_id: 11155111, // Sepolia's network id
     }
