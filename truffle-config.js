@@ -23,9 +23,8 @@
 //converting to js object for easy read and manipulation
 const fs = require('fs');
 require('dotenv').config();
-const { NODE_ENDPOINT } = process.env;
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-
+import { MNEMONIC, INFURA_NODE_ENDPOINT} from ".env";
 module.exports = {
   networks: {
     // Useful for testing. The `development` name is special - truffle uses it by default
@@ -33,31 +32,16 @@ module.exports = {
     // You should run a client (like ganache, geth, or parity) in a separate terminal
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
-    //
-    development: {
-      host: "127.0.0.1",     // Localhost (default: none)
-      port: 8545,            // Standard Ethereum port (default: none)
-      network_id: "*",       // Any network (default: none)
-    },
 
     sepolia: {
       provider: () => new HDWalletProvider(
-        private_key, 
-        INFURA_NODE_END_POINT
+        process.env.MNEMONIC, 
+        `https://sepolia.infura.io/v3/${process.env.INFURA_NODE_ENDPOINT}`
       ),
-      network_id: 11155111, // Sepolia's network id
+      network_id: 11155111
     }
-
-
-
   },
 
-  // Set default mocha options here, use special reporters, etc.
-  mocha: {
-    // timeout: 100000
-  },
-
-  // Configure your compilers
   compilers: {
     solc: {
       version: "0.8.19",      // Fetch exact version from solc-bin (default: truffle's version)
