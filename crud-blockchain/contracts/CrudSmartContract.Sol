@@ -8,7 +8,7 @@ contract CrudSmartContract {
     }
     //array of users
     User[] public users;
-    uint public nextId;
+    uint public nextId = 1;
 
     function create(string memory name) public {
         users.push(User(nextId, name));
@@ -40,19 +40,22 @@ contract CrudSmartContract {
                 return i;
             }
         }
-        revert("user not found");
+        revert("User doesnt exist");
     }
 
     function showAll() public view returns (string memory) {
         string memory allNames;
 
         for (uint i = 0; i < users.length; i++) {
-            if (i > 0) {
-                allNames = string(
-                    abi.encodePacked(allNames, ", ", users[i].name)
-                );
-            } else {
-                allNames = users[i].name;
+            if (bytes(users[i].name).length > 0) {
+                // Check if the name is not empty
+                if (bytes(allNames).length > 0) {
+                    allNames = string(
+                        abi.encodePacked(allNames, ", ", users[i].name)
+                    );
+                } else {
+                    allNames = users[i].name;
+                }
             }
         }
         return allNames;
