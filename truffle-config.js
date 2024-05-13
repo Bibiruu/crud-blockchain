@@ -20,18 +20,17 @@
  * PROJECT_ID = <Your Infura project id>
  */
 
-//converting to js object for easy read and manipulation
-const fs = require('fs');
-require('dotenv').config();
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-import { MNEMONIC, INFURA_NODE_ENDPOINT} from ".env";
+require('dotenv').config();
+
+
 module.exports = {
   networks: {
-    // Useful for testing. The `development` name is special - truffle uses it by default
-    // if it's defined here and no other network is specified at the command line.
-    // You should run a client (like ganache, geth, or parity) in a separate terminal
-    // tab if you use this network and you must also set the `host`, `port` and `network_id`
-    // options below to some value.
+    development: {
+      host: "127.0.0.1",
+      port: 7545,
+      network_id: "*",
+    },
 
     sepolia: {
       provider: () => new HDWalletProvider(
