@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import CrudSmartContract from '../build/contracts/CrudSmartContract.json';
+import CrudSmartContract from '../../build/contracts/CrudSmartContract.json';
 
 let web3;
 let crud;

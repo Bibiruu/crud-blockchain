@@ -17,12 +17,14 @@ module.exports = {
     sepolia: {
       provider: () => new HDWalletProvider(
         process.env.MNEMONIC, 
-        `https://sepolia.infura.io/v3/${process.env.INFURA_NODE_ENDPOINT}`, {
+        `https://sepolia.infura.io/v3/${process.env.INFURA_ENDPOINT}`, {
         //connection to be reused for multiple requests, rather than establishing a new oe
         providerOptions: {
           keepAlive: true,
           //time out to 20sec,prevent from waiting indefinitely
           timeout: 20000,
+          networkCheckTimeoutnetworkCheckTimeout: 10000,
+          timeoutBlocks: 200
         },
         clientConfig: {
           maxAttempts: 5,
