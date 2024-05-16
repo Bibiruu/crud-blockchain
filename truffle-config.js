@@ -22,9 +22,8 @@ module.exports = {
         providerOptions: {
           keepAlive: true,
           //time out to 20sec,prevent from waiting indefinitely
-          timeout: 20000,
-          networkCheckTimeoutnetworkCheckTimeout: 10000,
-          timeoutBlocks: 200
+          networkCheckTimeout: 10000,
+          
         },
         clientConfig: {
           maxAttempts: 5,
