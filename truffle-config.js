@@ -21,9 +21,11 @@ module.exports = {
         //connection to be reused for multiple requests, rather than establishing a new oe
         providerOptions: {
           keepAlive: true,
+          confirmations: 10,
           //time out to 20sec,prevent from waiting indefinitely
           networkCheckTimeout: 10000,
-          
+          timeoutBlocks: 200,
+          skipDryRun: true
         },
         clientConfig: {
           maxAttempts: 5,
