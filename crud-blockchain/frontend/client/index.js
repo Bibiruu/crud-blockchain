@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import CrudSmartContract from '../build/contracts/CrudSmartContract.json';
+import CrudSmartContract from '../../build/contracts/CrudSmartContract.json';
 
 let web3;
 let crud;
@@ -65,7 +65,7 @@ const initApp = () => {
       .then(() => {
         $createResult.innerHTML = `New user ${name} was sucessfully created`;
       })
-      .catch(() => {
+      .catch(_e => {
         $createResult.innerHTML = `Oops, theres was an error while trying to create a new user`;
       });
   });
@@ -79,7 +79,7 @@ const initApp = () => {
       .then(result => {
         $readResult.innerHTML = `Id: ${result[0]} Name: ${result[1]}`;
       })
-      .catch(() => {
+      .catch(_e => {
         $readResult.innerHTML = `Oops, theres was an problem while 
         trying to read user ${id}`;
       });
@@ -96,9 +96,9 @@ const initApp = () => {
         $editResult.innerHTML = `Changed name of user ${id} to
         ${name}`;
       })
-      .catch(() => {
+      .catch(_e => {
         $editResult.innerHTML = `Oops, theres was an error 
-        while trying to update user ${id}`;
+        while trying to update user ${id} to ${name}`;
       });
   });
 
@@ -111,12 +111,11 @@ const initApp = () => {
       .then(() => {
         $deleteResult.innerHTML = `Deleted user ${id}`;
       })
-      .catch(() => {
+      .catch(_e => {
         $deleteResult.innerHTML = `Oops, there was an error while trying
         to delete user ${id}`;
       });
   });
-
 };
 
 document.addEventListener('DOMContentLoaded', () => {

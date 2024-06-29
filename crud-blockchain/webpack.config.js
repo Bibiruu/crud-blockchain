@@ -2,14 +2,19 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './client/index.js',
+  entry: './frontend/client/index.js',
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js', // string
+    filename: 'bundle.js', // string3
   },
   devServer: {
-    contentBase: path.join(__dirname, 'public'),
+    static: path.join(__dirname, 'public'),
     compress: true,
     port: 8080
+  },
+  resolve: {
+    alias: {
+      '@contracts': path.resolve(__dirname, '../../build/contracts/CrudSmartContract.json')
+    }
   }
 };
